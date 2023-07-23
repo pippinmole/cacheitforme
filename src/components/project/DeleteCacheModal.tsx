@@ -3,7 +3,7 @@
 import {Button, Label, Modal, Spinner, TextInput} from "flowbite-react";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
-import {HiOutlineExclamationCircle} from "react-icons/hi";
+import {HiOutlineExclamationCircle, HiPlus} from "react-icons/hi";
 
 type DeleteCacheModalProps = {
   cache: any;
@@ -26,7 +26,7 @@ export default function DeleteCacheModal(props: DeleteCacheModalProps) {
   return (
     <>
       <Button size="xs" color="failure" onClick={() => setShow(true)}>
-        Delete Project
+        Delete
       </Button>
 
       <Modal show={show} size="md" popup onClose={() => setShow(false)}>

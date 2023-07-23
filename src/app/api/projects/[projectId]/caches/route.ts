@@ -60,6 +60,10 @@ export async function POST(request: Request, context: { params: any }) {
   }
 
   const response = await fetch(req.url);
+  const obj = await response.text();
+
+  console.log("Fetched url: " + req.url + " with response: " + obj);
+
   if(!response.ok) {
     return new NextResponse(
       JSON.stringify({
@@ -75,7 +79,7 @@ export async function POST(request: Request, context: { params: any }) {
     data: {
       name: req.name,
       url: req.url,
-      cachedJson: JSON.stringify(response.json()),
+      cachedJson: obj,
       project: {
         connect: {
           id: project.id

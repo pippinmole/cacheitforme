@@ -9,6 +9,8 @@ import {useState} from "react";
 import CreateCacheModal from "@/components/project/CreateCacheModal";
 import CopyToClipboard from "@/components/CopyToClipboard";
 import DeleteCacheModal from "@/components/project/DeleteCacheModal";
+import {HiPlus} from "react-icons/hi";
+import path from "path";
 
 type CacheOverviewProps = {
   project: ProjectWithCaches
@@ -44,17 +46,18 @@ export default function CacheOverview(props: CacheOverviewProps) {
 
   return (
     <>
-
       <CreateCacheModal show={creteCacheModalOpen} onClose={() => setCreateCacheModalOpen(false)} project={project}/>
 
-      <h2
-        className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-white">
-        Overview of {project.name}
-      </h2>
-
       <div className="w-full flex flex-row justify-end p-4">
+        <h2
+          className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-white flex-1">
+          Overview of {project.name}
+        </h2>
+
         <div onClick={() => setCreateCacheModalOpen(true)}>
           <Button gradientDuoTone="greenToBlue" size="sm">
+            <HiPlus className="my-auto mr-2"/>
+
             Add Cache
           </Button>
         </div>
@@ -66,7 +69,10 @@ export default function CacheOverview(props: CacheOverviewProps) {
             Cache Name
           </Table.HeadCell>
           <Table.HeadCell>
-            URL
+            Target URL
+          </Table.HeadCell>
+          <Table.HeadCell>
+            Cache URL
           </Table.HeadCell>
           <Table.HeadCell>
             Cache Duration
@@ -94,6 +100,12 @@ export default function CacheOverview(props: CacheOverviewProps) {
                 </CopyToClipboard>
               </Table.Cell>
               <Table.Cell>
+
+                <CopyToClipboard text={generateCacheUrl(cache.id)} >
+                  {limitStringLength(generateCacheUrl(cache.id), 60)}
+                </CopyToClipboard>
+              </Table.Cell>
+              <Table.Cell>
                 1 hour
               </Table.Cell>
               <Table.Cell>
@@ -102,7 +114,7 @@ export default function CacheOverview(props: CacheOverviewProps) {
               <Table.Cell>
                 {formatDateTime(cache.updatedAt)}
               </Table.Cell>
-              <Table.Cell className="flex flex-row gap-3 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+              <Table.Cell className="flex flex-row gap-3 font-medium text-cyan-600 dark:text-cyan-500">
                 <Link href={'/projects/' + project.id}>
                   <Button size="xs">
                     View
@@ -118,6 +130,13 @@ export default function CacheOverview(props: CacheOverviewProps) {
       </Table>
     </>
   )
+}
+
+function generateCacheUrl(cacheId: string) {
+  const currentDomain = window.location.host;
+  const cacheEndpoint = '/api/cache/';
+  const fullUrl = `http://${currentDomain}${cacheEndpoint}${encodeURIComponent(cacheId)}`;
+  return fullUrl;
 }
 
 function limitStringLength(inputString: string, length: number): string {

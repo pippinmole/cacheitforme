@@ -7,6 +7,7 @@ import Link from "next/link";
 import DeleteProjectButton from "@/components/dashboard/DeleteProjectModal";
 import {useRouter} from "next/navigation";
 import SiteBreadcrumb from "@/components/SiteBreadcrumb";
+import {HiPlus} from "react-icons/hi";
 
 type DashboardOverviewProps = {
   projects: any[]
@@ -49,6 +50,8 @@ export default function DashboardOverview(props: DashboardOverviewProps) {
 
         <div onClick={() => setCreateModalOpen(true)}>
           <Button gradientDuoTone="greenToBlue" size="sm">
+            <HiPlus className="my-auto mr-2"/>
+
             Add Project
           </Button>
         </div>
@@ -69,13 +72,10 @@ export default function DashboardOverview(props: DashboardOverviewProps) {
             Price
           </Table.HeadCell>
           <Table.HeadCell>
-          <span className="sr-only">
-            Edit
-          </span>
+            Actions
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-
           {props.projects && props.projects.map((project) => (
             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={project.id}>
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -90,8 +90,8 @@ export default function DashboardOverview(props: DashboardOverviewProps) {
               <Table.Cell>
                 $2999
               </Table.Cell>
-              <Table.Cell className="flex flex-row gap-3 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                <Link href={'/project/' + project.id}>
+              <Table.Cell className="flex flex-row gap-3 font-medium text-cyan-600 dark:text-cyan-500">
+                <Link href={'dashboard/project/' + project.id}>
                   <Button size="xs">
                     View
                   </Button>
