@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavbarWithDropdown from "@/components/MainNavbar";
 import Providers from "@/components/Providers";
-import SiteBreadcrumb from "@/components/SiteBreadcrumb";
+import FooterWithSocialMediaIcons from "@/components/FooterWithSocialMediaIcons";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,9 +23,9 @@ export default function RootLayout({
     <Providers>
       <NavbarWithDropdown/>
 
-      <>
-        {children}
-      </>
+      {children}
+
+      {/*<FooterWithSocialMediaIcons/>*/}
     </Providers>
     </body>
     </html>

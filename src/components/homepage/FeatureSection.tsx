@@ -1,15 +1,37 @@
+
 export default function FeatureSection() {
   return (
     <section className="bg-neutral-200 dark:bg-gray-900 w-full border-t border-gray-100 dark:border-gray-700">
       <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-        <div className="max-w-screen-md mb-8 lg:mb-16">
+        <div className="max-w-screen-md">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Designed for a <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">serverless experience.</mark>
+            Designed for a <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">serverless
+            experience.</mark>
           </h2>
           <p className="text-gray-500 sm:text-xl dark:text-gray-400">
             Focus on the things that matter. Let us handle the rest.
           </p>
         </div>
+
+        <section>
+          <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+            <dl className="grid max-w-screen-md gap-8 mx-auto text-gray-900 sm:grid-cols-3 dark:text-white">
+              <div className="flex flex-col items-center justify-center">
+                <dt className="mb-2 text-3xl md:text-4xl font-extrabold">73M+</dt>
+                <dd className="font-light text-gray-500 dark:text-gray-400">developers</dd>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <dt className="mb-2 text-3xl md:text-4xl font-extrabold">1B+</dt>
+                <dd className="font-light text-gray-500 dark:text-gray-400">contributors</dd>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <dt className="mb-2 text-3xl md:text-4xl font-extrabold">4M+</dt>
+                <dd className="font-light text-gray-500 dark:text-gray-400">organizations</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
         <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
           <div>
             <div
@@ -22,7 +44,8 @@ export default function FeatureSection() {
               </svg>
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-            <p className="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all
+            <p className="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with
+              all
               the organization and hit your marketing goals every month with our marketing plan.</p>
           </div>
           <div>
@@ -35,7 +58,8 @@ export default function FeatureSection() {
               </svg>
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">Legal</h3>
-            <p className="text-gray-500 dark:text-gray-400">Protect your organization, devices and stay compliant with our
+            <p className="text-gray-500 dark:text-gray-400">Protect your organization, devices and stay compliant with
+              our
               structured workflows and custom permissions made for you.</p>
           </div>
           <div>
@@ -51,7 +75,8 @@ export default function FeatureSection() {
               </svg>
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">Business Automation</h3>
-            <p className="text-gray-500 dark:text-gray-400">Auto-assign tasks, send Slack messages, and much more. Now power
+            <p className="text-gray-500 dark:text-gray-400">Auto-assign tasks, send Slack messages, and much more. Now
+              power
               up with hundreds of new templates to help you get started.</p>
           </div>
           <div>
@@ -81,7 +106,8 @@ export default function FeatureSection() {
               </svg>
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">Enterprise Design</h3>
-            <p className="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both marketing and
+            <p className="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both marketing
+              and
               product with real cross-company collaboration.</p>
           </div>
           <div>
@@ -95,7 +121,8 @@ export default function FeatureSection() {
               </svg>
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">Operations</h3>
-            <p className="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable, iterative, and
+            <p className="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable, iterative,
+              and
               structured workflows built for all efficient teams and individual.</p>
           </div>
         </div>
