@@ -23,9 +23,9 @@ export default function RootLayout({
     <Providers>
       <NavbarWithDropdown/>
 
-      <div className="pt-16 px-24 dark:border-gray-700 dark:bg-gray-800 sm:px-4">
+      <>
         {children}
-      </div>
+      </>
     </Providers>
     </body>
     </html>

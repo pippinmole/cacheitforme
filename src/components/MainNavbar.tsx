@@ -23,8 +23,9 @@ export default function NavbarWithDropdown() {
         {session?.user ? (
           <Dropdown
             inline
+            arrowIcon={false}
             label={<Avatar alt="User settings"
-                           img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded/>}
+                           img={session.user.image ?? "https://flowbite.com/docs/images/people/profile-picture-5.jpg"} rounded/>}
           >
             <Dropdown.Header>
             <span className="block text-sm font-bold">
