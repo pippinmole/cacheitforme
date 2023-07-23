@@ -3,10 +3,30 @@
 import {Avatar, Button, DarkThemeToggle, Dropdown, Navbar} from 'flowbite-react';
 import {useSession, signIn, signOut} from "next-auth/react";
 import Link from "next/link";
+import {usePathname} from "next/navigation";
+
+function getLastSegment(url: string): string | null {
+  // Remove the query parameters from the URL, if any
+  const urlWithoutParams = url.split('?')[0];
+
+  // Split the URL by '/' to get the individual path segments
+  const pathSegments = urlWithoutParams.split('/');
+
+  // Filter out any empty segments (e.g., leading/trailing slashes)
+  const validSegments = pathSegments.filter(segment => segment !== '');
+
+  // Return the last segment if it exists, otherwise return null
+  return validSegments.length > 0 ? validSegments[validSegments.length - 1] : null;
+}
 
 export default function NavbarWithDropdown() {
 
+  const asPath = usePathname();
   const {data: session} = useSession();
+
+  const lastPath = getLastSegment(asPath);
+
+  console.log(lastPath)
 
   return (
     <Navbar
@@ -68,13 +88,16 @@ export default function NavbarWithDropdown() {
       </div>
       <Navbar.Collapse>
         <Navbar.Link
-          active
+          active={lastPath?.toLowerCase() == null}
           href="/"
           as={Link}
         >
             Home
         </Navbar.Link>
-        <Navbar.Link href="/dashboard" as={Link}>
+        <Navbar.Link
+          active={lastPath?.toLowerCase() === "dashboard".toLowerCase()}
+          href="/dashboard"
+          as={Link}>
           Dashboard
         </Navbar.Link>
       </Navbar.Collapse>
