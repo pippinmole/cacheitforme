@@ -5,7 +5,7 @@ import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, Hi
 
 export default function DashboardSidebar() {
   return (
-    <Sidebar aria-label="Sidebar with call to action button example">
+    <Sidebar aria-label="Sidebar with call to action button example" className="ml-5">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item
