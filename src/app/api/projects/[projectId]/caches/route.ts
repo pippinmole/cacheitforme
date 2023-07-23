@@ -2,14 +2,19 @@ import {getServerSession} from "next-auth";
 import {NextResponse} from "next/server";
 import {authOptions} from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import {User} from ".prisma/client";
 
 export type CacheCreateRequest = {
-  projectName: string;
+  name: string;
+  url: string;
+}
+
+export type CacheDeleteRequest = {
   cacheId: string;
 }
 
-export async function POST(request: Request) {
+// Create a new cache for a project
+export async function POST(request: Request, context: { params: any }) {
+
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -24,7 +29,7 @@ export async function POST(request: Request) {
       // @ts-ignore
       id: session?.user?.id
     }
-  }) as User;
+  });
 
   if (!user) {
     return new NextResponse(
@@ -36,10 +41,11 @@ export async function POST(request: Request) {
   const body = await request.json()
   const req = body as CacheCreateRequest;
 
-  // const projectName = (request.body as ProjectCreateRequest).projectName;
+  console.log("Context projectId: " + context.params.projectId)
+
   const project = await prisma.project.findUnique({
     where: {
-      id: req.cacheId
+      id: context.params.projectId
     },
     include: {
       caches: true
@@ -53,11 +59,23 @@ export async function POST(request: Request) {
     );
   }
 
+  const response = await fetch(req.url);
+  if(!response.ok) {
+    return new NextResponse(
+      JSON.stringify({
+        body: "Error from target URL",
+        status: response.status,
+        statusText: response.statusText
+      }),
+      {status: 401}
+    );
+  }
+
   const newCache = await prisma.cache.create({
     data: {
-      name: req.projectName,
-      url: "",
-      cachedJson: "",
+      name: req.name,
+      url: req.url,
+      cachedJson: JSON.stringify(response.json()),
       project: {
         connect: {
           id: project.id
@@ -74,4 +92,42 @@ export async function POST(request: Request) {
   });
 
   return NextResponse.json(updatedProject);
+}
+
+// Create a new cache for a project
+export async function DELETE(request: Request) {
+
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return new NextResponse(
+      JSON.stringify({body: "User not found"}),
+      {status: 401}
+    )
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      // @ts-ignore
+      id: session?.user?.id
+    }
+  });
+
+  if (!user) {
+    return new NextResponse(
+      JSON.stringify({body: "User not found"}),
+      {status: 401}
+    );
+  }
+
+  const body = await request.json()
+  const req = body as CacheDeleteRequest;
+
+  await prisma.cache.delete({
+    where: {
+      id: req.cacheId,
+    },
+  });
+
+  return NextResponse.json({message: "Successfully deleted project"});
 }

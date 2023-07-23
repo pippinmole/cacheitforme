@@ -8,6 +8,7 @@ export type ProjectCreateRequest = {
   projectName: string
 }
 
+// Create a new project
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
 
@@ -54,6 +55,7 @@ type ProjectDeleteRequest = {
   projectId: string
 }
 
+// Delete a project
 export async function DELETE(request: Request) {
   const session = await getServerSession(authOptions);
 
@@ -84,7 +86,7 @@ export async function DELETE(request: Request) {
 
   if(!projectId) {
     return new NextResponse(
-      JSON.stringify({body: "Please provide a project id"}),
+      JSON.stringify({body: "Please provide a projects id"}),
       {status: 401}
     );
   }
