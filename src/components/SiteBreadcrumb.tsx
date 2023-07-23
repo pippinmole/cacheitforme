@@ -3,6 +3,7 @@
 import {Breadcrumb} from "flowbite-react";
 import {HiHome} from "react-icons/hi";
 import {usePathname} from "next/navigation";
+import Link from "next/link";
 
 export default function SiteBreadcrumb() {
   const pathname = usePathname()
@@ -26,7 +27,7 @@ export default function SiteBreadcrumb() {
 
   for (const item of includedPaths) {
     const containsPath = pathname.includes(item.path);
-    if(containsPath) {
+    if (containsPath) {
       result.push(item);
     }
   }
@@ -36,8 +37,11 @@ export default function SiteBreadcrumb() {
     const isHome = item.path === "/";
 
     return (
-      <Breadcrumb.Item key={item.path} href={isLastItem ? undefined : item.path} icon={isHome ? HiHome : undefined}>
-        <p>{item.name}</p>
+      <Breadcrumb.Item icon={isHome ? HiHome : undefined} key={item.path}>
+        <Link href={item.path} key={item.path}>
+          <p>{item.name}</p>
+        </Link>
+
       </Breadcrumb.Item>
     );
   });

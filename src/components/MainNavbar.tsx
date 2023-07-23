@@ -2,6 +2,7 @@
 
 import {Avatar, Button, DarkThemeToggle, Dropdown, Navbar} from 'flowbite-react';
 import {useSession, signIn, signOut} from "next-auth/react";
+import Link from "next/link";
 
 export default function NavbarWithDropdown() {
 
@@ -69,12 +70,11 @@ export default function NavbarWithDropdown() {
         <Navbar.Link
           active
           href="/"
+          as={Link}
         >
-          <p>
             Home
-          </p>
         </Navbar.Link>
-        <Navbar.Link href="/dashboard">
+        <Navbar.Link href="/dashboard" as={Link}>
           Dashboard
         </Navbar.Link>
       </Navbar.Collapse>

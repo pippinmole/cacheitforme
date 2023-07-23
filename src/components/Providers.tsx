@@ -2,6 +2,7 @@
 
 import {SessionProvider} from "next-auth/react";
 import {Flowbite} from "flowbite-react";
+import NextNProgress from 'nextjs-progressbar';
 
 type Props = {
   children: React.ReactNode
@@ -10,9 +11,10 @@ type Props = {
 export default function Providers(props: Props) {
   return (
     <Flowbite>
-    <SessionProvider>
-      {props.children}
-    </SessionProvider>
+      <SessionProvider>
+        <NextNProgress height={6} color={"#000000"} showOnShallow={true}  />
+        {props.children}
+      </SessionProvider>
     </Flowbite>
   )
 }
